@@ -1,47 +1,43 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "open-seo",
-  "main": "src/server.ts",
-  "compatibility_date": "2025-09-02",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": {
-    "enabled": true,
-  },
-  "routes": [
-    {
-      "pattern": "app.openseo.so",
-      "custom_domain": true,
-    },
-    {
-      "pattern": "www.app.openseo.so",
-      "custom_domain": true,
-    },
-  ],
-  "workflows": [
-    {
-      "name": "site-audit-workflow",
-      "binding": "SITE_AUDIT_WORKFLOW",
-      "class_name": "SiteAuditWorkflow",
-    },
-  ],
-  "kv_namespaces": [
-    {
-      "binding": "KV",
-      "id": "4abd52f3f2c549ac83cc2cb4ceec8620",
-    },
-  ],
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "open-seo",
-      "database_id": "37bee90a-e1aa-404f-b01e-b0d1d479bda1",
-      "migrations_dir": "drizzle",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "bucket_name": "open-seo",
-      "binding": "R2",
-    },
-  ],
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "tpc-open-seo",
+	"account_id": "38d9c1cbb51d83ab247e96dd7685974e",
+	"main": "src/server.ts",
+	"compatibility_date": "2025-09-02",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true,
+	},
+	"routes": [
+		{
+			"pattern": "openseo.theportlandcompany.com",
+			"custom_domain": true,
+		},
+	],
+	"workflows": [
+		{
+			"name": "site-audit-workflow",
+			"binding": "SITE_AUDIT_WORKFLOW",
+			"class_name": "SiteAuditWorkflow",
+		},
+	],
+	"kv_namespaces": [
+		{
+			"binding": "KV",
+			"id": "409b22692cec4be4814846b7b56158d8"
+		},
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "tpc-open-seo",
+			"database_id": "4ffb4124-91d4-4ab6-8878-983420b9fb93",
+			"migrations_dir": "drizzle"
+		},
+	],
+	"vars": {
+		"AUTH_MODE": "local_noauth",
+	},
 }

@@ -21,7 +21,11 @@ import { Route as AuthenticatedSubscribeRouteImport } from './routes/_authentica
 import { Route as AuthSignUpRouteImport } from './routes/_auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/_auth.sign-in'
 import { Route as AppSupportRouteImport } from './routes/_app/support'
+import { Route as AppKeywordsRouteImport } from './routes/_app/keywords'
+import { Route as AppDomainRouteImport } from './routes/_app/domain'
 import { Route as AppBillingRouteImport } from './routes/_app/billing'
+import { Route as AppBacklinksRouteImport } from './routes/_app/backlinks'
+import { Route as AppAuditRouteImport } from './routes/_app/audit'
 import { Route as ApiAutumnSplatRouteImport } from './routes/api/autumn/$'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppHelpDataforseoApiKeyRouteImport } from './routes/_app/help/dataforseo-api-key'
@@ -92,9 +96,29 @@ const AppSupportRoute = AppSupportRouteImport.update({
   path: '/support',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppKeywordsRoute = AppKeywordsRouteImport.update({
+  id: '/keywords',
+  path: '/keywords',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppDomainRoute = AppDomainRouteImport.update({
+  id: '/domain',
+  path: '/domain',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppBillingRoute = AppBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppBacklinksRoute = AppBacklinksRouteImport.update({
+  id: '/backlinks',
+  path: '/backlinks',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppAuditRoute = AppAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => AppRouteRoute,
 } as any)
 const ApiAutumnSplatRoute = ApiAutumnSplatRouteImport.update({
@@ -172,7 +196,11 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/audit': typeof AppAuditRoute
+  '/backlinks': typeof AppBacklinksRoute
   '/billing': typeof AppBillingRoute
+  '/domain': typeof AppDomainRoute
+  '/keywords': typeof AppKeywordsRoute
   '/support': typeof AppSupportRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
@@ -196,7 +224,11 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/audit': typeof AppAuditRoute
+  '/backlinks': typeof AppBacklinksRoute
   '/billing': typeof AppBillingRoute
+  '/domain': typeof AppDomainRoute
+  '/keywords': typeof AppKeywordsRoute
   '/support': typeof AppSupportRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
@@ -222,7 +254,11 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/_app/audit': typeof AppAuditRoute
+  '/_app/backlinks': typeof AppBacklinksRoute
   '/_app/billing': typeof AppBillingRoute
+  '/_app/domain': typeof AppDomainRoute
+  '/_app/keywords': typeof AppKeywordsRoute
   '/_app/support': typeof AppSupportRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
@@ -249,7 +285,11 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/audit'
+    | '/backlinks'
     | '/billing'
+    | '/domain'
+    | '/keywords'
     | '/support'
     | '/sign-in'
     | '/sign-up'
@@ -273,7 +313,11 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/audit'
+    | '/backlinks'
     | '/billing'
+    | '/domain'
+    | '/keywords'
     | '/support'
     | '/sign-in'
     | '/sign-up'
@@ -298,7 +342,11 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/_app/audit'
+    | '/_app/backlinks'
     | '/_app/billing'
+    | '/_app/domain'
+    | '/_app/keywords'
     | '/_app/support'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
@@ -417,11 +465,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSupportRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/keywords': {
+      id: '/_app/keywords'
+      path: '/keywords'
+      fullPath: '/keywords'
+      preLoaderRoute: typeof AppKeywordsRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/domain': {
+      id: '/_app/domain'
+      path: '/domain'
+      fullPath: '/domain'
+      preLoaderRoute: typeof AppDomainRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/_app/billing': {
       id: '/_app/billing'
       path: '/billing'
       fullPath: '/billing'
       preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/backlinks': {
+      id: '/_app/backlinks'
+      path: '/backlinks'
+      fullPath: '/backlinks'
+      preLoaderRoute: typeof AppBacklinksRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/audit': {
+      id: '/_app/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AppAuditRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/api/autumn/$': {
@@ -519,14 +595,22 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteRouteChildren {
+  AppAuditRoute: typeof AppAuditRoute
+  AppBacklinksRoute: typeof AppBacklinksRoute
   AppBillingRoute: typeof AppBillingRoute
+  AppDomainRoute: typeof AppDomainRoute
+  AppKeywordsRoute: typeof AppKeywordsRoute
   AppSupportRoute: typeof AppSupportRoute
   AppIndexRoute: typeof AppIndexRoute
   AppHelpDataforseoApiKeyRoute: typeof AppHelpDataforseoApiKeyRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppAuditRoute: AppAuditRoute,
+  AppBacklinksRoute: AppBacklinksRoute,
   AppBillingRoute: AppBillingRoute,
+  AppDomainRoute: AppDomainRoute,
+  AppKeywordsRoute: AppKeywordsRoute,
   AppSupportRoute: AppSupportRoute,
   AppIndexRoute: AppIndexRoute,
   AppHelpDataforseoApiKeyRoute: AppHelpDataforseoApiKeyRoute,

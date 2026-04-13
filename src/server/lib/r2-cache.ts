@@ -30,7 +30,12 @@ export async function buildCacheKey(
  * Get a cached JSON value from R2. Returns null on miss or expiry.
  */
 export async function getCached(key: string): Promise<unknown> {
-  const obj = await env.R2.get(`${CACHE_PREFIX}${key}`);
+  const bucket = env.R2;
+  if (!bucket) {
+    return null;
+  }
+
+  const obj = await bucket.get(`${CACHE_PREFIX}${key}`);
   if (!obj) return null;
 
   const expiresAt = obj.customMetadata?.expiresAt;
@@ -51,7 +56,12 @@ export async function setCached<T>(
   data: T,
   ttlSeconds: number,
 ): Promise<void> {
-  await env.R2.put(`${CACHE_PREFIX}${key}`, JSON.stringify(data), {
+  const bucket = env.R2;
+  if (!bucket) {
+    return;
+  }
+
+  await bucket.put(`${CACHE_PREFIX}${key}`, JSON.stringify(data), {
     httpMetadata: { contentType: "application/json" },
     customMetadata: {
       expiresAt: new Date(Date.now() + ttlSeconds * 1000).toISOString(),

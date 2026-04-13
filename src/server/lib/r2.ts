@@ -1,7 +1,12 @@
 import { env } from "cloudflare:workers";
 
 export async function getJsonFromR2(key: string): Promise<string> {
-  const object = await env.R2.get(key);
+  const bucket = env.R2;
+  if (!bucket) {
+    throw new Error("R2 binding not configured");
+  }
+
+  const object = await bucket.get(key);
   if (!object) {
     throw new Error("Audit payload not found");
   }
@@ -12,8 +17,13 @@ export async function getJsonFromR2(key: string): Promise<string> {
 export async function putTextToR2(
   key: string,
   body: string,
-): Promise<{ key: string; sizeBytes: number }> {
-  await env.R2.put(key, body, {
+): Promise<{ key: string; sizeBytes: number } | null> {
+  const bucket = env.R2;
+  if (!bucket) {
+    return null;
+  }
+
+  await bucket.put(key, body, {
     httpMetadata: {
       contentType: "application/json",
     },

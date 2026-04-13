@@ -107,8 +107,12 @@ export async function fetchAndStoreLighthouseResult(input: {
 
   return {
     ...fetched.result,
-    r2Key: uploaded.key,
-    payloadSizeBytes: uploaded.sizeBytes,
+    ...(uploaded
+      ? {
+          r2Key: uploaded.key,
+          payloadSizeBytes: uploaded.sizeBytes,
+        }
+      : {}),
   };
 }
 
