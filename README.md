@@ -280,3 +280,25 @@ That means you can try OpenSEO for free with the starter credit, then decide if/
 - 100 backlinks page searches at current defaults before opening extra tabs: about `$4.30`
 - 100 fully explored backlinks domain searches: about `$10.94`
 - 100 fully explored backlinks page searches: about `$8.61`
+
+---
+
+## TPC SEO Tools Ecosystem
+
+This repo is one of several related SEO tools under `theportlandcompany.com`. They are separate products, often confused. Status verified 2026-09-07.
+
+| Tool (repo) | Domain | Status | Role |
+| --- | --- | --- | --- |
+| **seo-tools** | `seo-tools.theportlandcompany.com` (**hyphen**) | ✅ Live (200) | The main live SEO reporting app — GSC + GA4 + keyword density + AI analyst. Multi-org (NuEra Heat, Silvaris). Cloudflare Pages project `seo-tools` → `seo-tools-cfx.pages.dev`. Began as the NuEra Heat report extracted from `dan-clemens/dan-clemens-multisite`. |
+| **seo-tools-sharelink** | (share-link build of seo-tools) | — | Public share-link variant of the seo-tools app. |
+| **tpc-seo** (TPC SEO Ops) | `seotool.theportlandcompany.com` (**singular**) | ❌ 522 — not deployed | Autonomous SEO operations console (site inventory, assessments, approvals). AAAA `100::` placeholder record, not attached to any Pages project. |
+| **open-seo** (OpenSEO) | `openseo.theportlandcompany.com` | ❌ 522 — not set up | Pay-as-you-go Semrush/Ahrefs alternative. Placeholder record only. |
+| **tpc-seo-keyword-density-analyzer** / **tpc-keyword-density-api** | `keyworddensity.theportlandcompany.com` | ✅ Live | Standalone keyword-density product (used by seo-tools too). |
+| **tpc-keyword-tracking-serpbear** | (SerpBear, Railway-hosted) | — | Keyword rank tracking (SerpBear). |
+| **tpc-analytics-umami** | `analytics.theportlandcompany.com` | ✅ Live (200) | Umami web analytics. |
+
+**Traps:**
+- The live report is `seo-tools.theportlandcompany.com` **with a hyphen**. `seotools` (no hyphen) 522s — it has no DNS record and only matches the `*.theportlandcompany.com` wildcard.
+- `seotool` (singular) ≠ `seo-tools` (hyphen). Singular is the unfinished TPC SEO Ops console.
+
+Cloudflare: TPC account `38d9c1cbb51d83ab247e96dd7685974e`, zone `theportlandcompany.com` (`7e700679c41f0a7cdcc8cfbdbfc4d6b5`).
